@@ -1,0 +1,13 @@
+<div>
+  <%= image_tag @user.get_iamge %>
+  <h2>Title</h2>
+  <p><%= @book.title %></p>
+
+  <h2>Opinion</h2>
+  <p><%= @book.body %></p>
+
+  <% if @book.user == current_user %>
+    <%= link_to "削除", book_path(@book), method: :delete %>
+  <% end %>
+
+</div>
