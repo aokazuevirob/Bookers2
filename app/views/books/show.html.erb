@@ -1,3 +1,5 @@
+<p id="notice"><%= flash[:notice] %></p>
+
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
@@ -18,13 +20,27 @@
         </thead>
         <tbody>
           <tr>
-            <td><%= image_tag @user.get_profile_image(100,100) %></td>
+            <td><%= image_tag @user.get_profile_image(100,100) %><br>
+              <%= link_to user_path(@user.id) do %>
+                <%=@user.name %>
+              <% end %>
+            </td>
             <td>
               <%= link_to book_path(@book.id) do %>
-              　<%=@book.title %>
+              <%=@book.title %>
               <% end %>
             </td>
             <td><%=@book.body %></td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %>
+              <% end %>
+            </td>
+            <td>
+              <% if @book.user == current_user %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-sm btn-danger" %>
+              <% end %>
+            </td>
           </tr>
         </tbody>
       </table>
