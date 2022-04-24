@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   belongs_to :user
 
   validates :title, presence: true
-  validates :body, presence: true
+  validates :body, presence: true, length: { in: 1..200 }
 
   def get_image
     if image.attached?
